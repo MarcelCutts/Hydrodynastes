@@ -3,7 +3,7 @@ A console-bound Python implementation of the classic 1930s guessing game, Battle
 
 
 # Project milestones
-Currently working towards the *first milestone*. A more detailed overview can be found on this Trello board.
+Currently working towards the *first milestone*. A more detailed overview can be found on [this Trello board](https://trello.com/b/bYKzCOuT/hydrodynastes).
 
 ### First milestone - Simple single player
 Initially the application aims to display a grid, allow you to place a single, one square grid sized vessel, and compete against an AI which utilises random random, but enthusiastic, firing strategies.
