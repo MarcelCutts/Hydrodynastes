@@ -5,30 +5,28 @@ from boards import Board
 
 
 class BoardTests(unittest.TestCase):
-    def test_rows_on_square_board_generated_correctly(self):
-        square_board = Board('testplayer', rows=2, columns=2)
+    def test_grid_on_square_board_generated_correctly(self):
+        square_board = self._generate_and_test_board_dimensions(expected_column_quantity=2,
+                                                                expected_row_quantity=2)
 
-        # Grid should be 2 long, 2 deep
-        number_of_rows = len(square_board.grid)
-        number_of_columns = len(square_board.grid[0])
+    def test_grid_on_wide_board_generated_correctly(self):
+        wide_board = self._generate_and_test_board_dimensions(expected_column_quantity=6,
+                                                              expected_row_quantity=2)
 
-        self.assertEqual(number_of_columns, 2)
-        self.assertEqual(number_of_rows, 2)
+    def test_grid_on_tall_board_generated_correctly(self):
+        tall_board = self._generate_and_test_board_dimensions(expected_column_quantity=2,
+                                                              expected_row_quantity=6)
 
-    def test_rows_on_wide_board_generated_correctly(self):
-        wide_board = Board('testplayer', rows=2, columns=6)
+    def _generate_and_test_board_dimensions(self, expected_column_quantity, expected_row_quantity):
+        test_board = Board('testplayer', rows=expected_column_quantity, columns=expected_column_quantity)
 
-        # Grid should be 6 long, 2 deep
-        number_of_rows = len(wide_board.grid)
-        number_of_columns = len(wide_board.grid[0])
+        # Grid should match the column, row values from arguments
+        number_of_rows = len(test_board.grid)
+        number_of_columns = len(test_board.grid[0])
 
-        self.assertEqual(number_of_columns, 6)
-        self.assertEqual(number_of_rows, 2)
+        self.assertEqual(number_of_columns, expected_column_quantity)
+        self.assertEqual(number_of_rows, expected_row_quantity)
 
-
-    def _generate_and_test_board_dimensions(expected_row_quantyt, expected_column_):
-        pass
-        # Oops getting off train
 
 
 
