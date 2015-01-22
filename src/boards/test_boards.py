@@ -18,7 +18,7 @@ class BoardTests(unittest.TestCase):
                                                               expected_row_quantity=6)
 
     def _generate_and_test_board_dimensions(self, expected_column_quantity, expected_row_quantity):
-        test_board = Board('testplayer', rows=expected_column_quantity, columns=expected_column_quantity)
+        test_board = Board('testplayer', columns=expected_column_quantity, rows=expected_row_quantity)
 
         # Grid should match the column, row values from arguments
         number_of_rows = len(test_board.grid)

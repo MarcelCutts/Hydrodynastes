@@ -9,7 +9,8 @@ import pprint
 
 class Board(object):
 
-    def __init__(self, player, rows=5, columns=5):
+
+    def __init__(self, player, columns=5, rows=5):
         """
         Initialises new board object and sets
         the symbols, size of the board.
@@ -20,23 +21,22 @@ class Board(object):
         self.player = player
         self.unknown_space = "O"
         self.empty_space = "X"
-        self.grid = self.__generate_grid(rows, columns)
+        self.grid = self.__generate_grid(columns=columns, rows=rows)
 
     def display(self):
         current_row = "A"
         current_column = 1
 
-        # Print the top board markers
-        # Starting with a space and climbing alphabetically
-
-        # Classic method
+        # Decided to use a simpler-to-read loop here as opposed to 
+        # a higher order functional approach, as it was terrible to read
+        # This prints the letters at the top of the grid denoting location
         top_line = "   "
         for column in self.grid[0]:
             top_line += current_row + " "
             current_row = chr(ord(current_row)+1)
         print top_line
 
-        # Both output "   A B C D E"
+        # Print the numbers on the left column of the grid
         for row in self.grid:
             print(str(current_column) + "| " + " ".join(row))
             current_column += 1
@@ -47,9 +47,10 @@ class Board(object):
     def is_board_still_in_play(self):
         pass
 
-    def __generate_grid(self, rows, columns):
-        return [[self.unknown_space for x in xrange(columns)] for x in xrange(rows)]
-
+    def __generate_grid(self, columns, rows):
+        return [[self.unknown_space for x in xrange(columns)] 
+                for x 
+                in xrange(rows)]
 
 
 class AiBoard(Board):
