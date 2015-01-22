@@ -7,8 +7,11 @@ or not it is in a "finished" or "playing" state.
 import pprint
 
 
-class Board(object):
-
+class BaseBoard(object):
+    """
+    Base board object storing key attributes, properties and methods
+    that are to be used by all board types that wil be played in the game
+    """
 
     def __init__(self, player, columns=5, rows=5):
         """
@@ -24,6 +27,13 @@ class Board(object):
         self.grid = self.__generate_grid(columns=columns, rows=rows)
 
     def display(self):
+        """
+        Prints (prettily) an ASCII-style representation of the
+        game board, featuring current state of play on a particular
+        board as defined by the internal grid variable.
+        Returns: 
+            ASCII-style board as string to display
+        """
         current_row = "A"
         current_column = 1
 
@@ -48,6 +58,16 @@ class Board(object):
         pass
 
     def __generate_grid(self, columns, rows):
+        """
+        Creates the internal grid which act similar to squares 
+        or individual playing spaces on a game board. As a collective
+        these make up the board or play-space for a player. A list
+        comprehension within a list comprehension is used. The initial
+        comprehension is the "width" or "column" while how many of those
+        generated constitute the "height" or "rows.
+        Returns:
+            Nested lists representing playing field.
+        """
         return [[self.unknown_space for x in xrange(columns)] 
                 for x 
                 in xrange(rows)]
