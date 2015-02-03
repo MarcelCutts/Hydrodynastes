@@ -24,6 +24,7 @@ class BaseBoard(object):
         self.player = player
         self.unknown_space = "O"
         self.empty_space = "X"
+        self.shipe_space = "S"
         self.grid = self.__generate_grid(columns=columns, rows=rows)
 
     def display(self):
@@ -50,12 +51,20 @@ class BaseBoard(object):
         for row in self.grid:
             print(str(current_column) + "| " + " ".join(row))
             current_column += 1
-
-    def place_ship(self, ship):
-        pass
+ 
 
     def is_board_still_in_play(self):
-        pass
+        """
+        Checks whether a board is still in play by checking whether
+        any grid position still holds a ship. If any ship is still 
+        found, the board is still in play.
+        :returns: True if still in play, else False
+        """
+        for row in self.grid:
+            if row.contains(self.shipe_space):
+                return True
+
+        return False    
 
     def __generate_grid(self, columns, rows):
         """
@@ -74,6 +83,9 @@ class BaseBoard(object):
 
 
 class AiBoard(Board):
+    """
+    Holds the state of the AI player's board, and exposes methods to progress it
+    """
 
     def __init__(self, player):
         Board.__init__(self, player)
@@ -84,9 +96,6 @@ class AiBoard(Board):
         Takes a turn for the AI by randomly choosing a grid location
         Returns a 1x2 tuple
         """
-
-
-
         # Add location to attempted locations
         attempt_location = (row_location, column_location)
         if attempt_location in attempted_locations:
@@ -107,6 +116,16 @@ class AiBoard(Board):
 
         return (column_location, row_location)
 
+
+class PlayerBoard(BaseBoard):
+    """
+    Board containing state and methods to act upon the board by a player
+    """
+
+    def __init__(self):
+        """
+        """
+        pass
 
 
 
