@@ -4,7 +4,7 @@ displaying itself, arranging and maintaining ships, and knowing whether
 or not it is in a "finished" or "playing" state.
 """
 
-import pprint
+from random import randint
 
 
 class BaseBoard(object):
@@ -51,7 +51,6 @@ class BaseBoard(object):
         for row in self.grid:
             print(str(current_column) + "| " + " ".join(row))
             current_column += 1
- 
 
     def is_board_still_in_play(self):
         """
@@ -61,7 +60,7 @@ class BaseBoard(object):
         :returns: True if still in play, else False
         """
         for row in self.grid:
-            if row.contains(self.shipe_space):
+            if row.contains(self.ship_space):
                 return True
 
         return False    
@@ -82,13 +81,13 @@ class BaseBoard(object):
                 in xrange(rows)]
 
 
-class AiBoard(Board):
+class AiBoard(BaseBoard):
     """
     Holds the state of the AI player's board, and exposes methods to progress it
     """
 
     def __init__(self, player):
-        Board.__init__(self, player)
+        BaseBoard.__init__(self, player)
         self.attempted_locations = []
 
     def take_turn(self):
@@ -96,25 +95,22 @@ class AiBoard(Board):
         Takes a turn for the AI by randomly choosing a grid location
         Returns a 1x2 tuple
         """
-        # Add location to attempted locations
-        attempt_location = (row_location, column_location)
-        if attempt_location in attempted_locations:
-            self.take_turn()
-        else:
-            attempted_locations.append(attempt_location)
+        pass
 
-        print ("AI attempting " + str(attempt_location))
-        return attempt_location
-
-
-    def _generate_random_location():
+    def _generate_random_location(self):
+        """
+        Generates a random grid location somewhere
+        on the available board space.
+        Returns:
+            A grid location tuple in (x, y) format
+        """
 
         number_of_rows = len(self.grid)
-        number_of_columns = len(self.gird[0])
+        number_of_columns = len(self.grid[0])
         row_location = randint(0, number_of_rows - 1)
-        column_location =randint(0, number_of_columns - 1)
+        column_location = randint(0, number_of_columns - 1)
 
-        return (column_location, row_location)
+        return column_location, row_location
 
 
 class PlayerBoard(BaseBoard):
