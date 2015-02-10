@@ -22,9 +22,9 @@ class BaseBoard(object):
             coulumns: Boards number of columns wide.
         """
         self.player = player
-        self.unknown_space = "O"
-        self.empty_space = "X"
-        self.shipe_space = "S"
+        self.location_unknown_occupation = "O"
+        self.location_unoccupied_by_ship = "X"
+        self.location_occupied_by_ship = "S"
         self.grid = self.__generate_grid(columns=columns, rows=rows)
 
     def display(self):
@@ -60,7 +60,7 @@ class BaseBoard(object):
         :returns: True if still in play, else False
         """
         for row in self.grid:
-            if row.contains(self.ship_space):
+            if row.contains(self.location_occupied_by_ship):
                 return True
 
         return False    
@@ -76,7 +76,7 @@ class BaseBoard(object):
         Returns:
             Nested lists representing playing field.
         """
-        return [[self.unknown_space for x in xrange(columns)] 
+        return [[self.location_unknown_occupation for x in xrange(columns)]
                 for x 
                 in xrange(rows)]
 
